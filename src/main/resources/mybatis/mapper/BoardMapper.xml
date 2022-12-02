@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.example.demo.model.BoardDao">
+ 	<select id="listBbs" resultType="com.example.demo.vo.BoardVo">
+ 		SELECT * FROM board
+	</select>
+	<insert id="insertBbs" parameterType="com.example.demo.vo.BoardVo">
+		INSERT INTO board
+		(content, regDate)
+		VALUES
+		(#{content}, now())
+	</insert>
+</mapper>
