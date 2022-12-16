@@ -29,6 +29,12 @@ public class BoardController {
 	@RequestMapping("/list")
 	@ResponseBody
 	public Map<String, Object> list() throws Exception{
+		return this.list_();
+	}
+	
+	@RequestMapping("/list/*")
+	@ResponseBody
+	public Map<String, Object> list_() throws Exception{
 		
 		Map<String, Object> robj = new HashMap<>();
 		List<BoardVo> list = boardDao.listBbs();

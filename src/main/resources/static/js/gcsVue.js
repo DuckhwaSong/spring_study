@@ -1,0 +1,4 @@
+let gcsVue={
+	data:{},	
+	methods: {}
+};
