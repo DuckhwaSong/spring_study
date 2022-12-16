@@ -51,13 +51,28 @@
             };
     var app = Vue.createApp({
         data() { return gcsVue.data; },
+		watch: {
+			result(newResult, oldResult){
+				console.log(newResult);
+				console.log(oldResult);
+				alert(888);
+			}
+		},
         methods: {
 			cSubmit:function(){
-				alert('1');
+				alert(1);
+				gcsVue.methods.getDataGET('https://api.github.com/users/hadley/orgs');
+				alert(2);
+				
+				//console.log(gcsVue.data.result);
 			}
 			
 		}
-    }).mount('#app')
+    }).mount('#app');
+    /*gcsVue.methods.getDataGET('https://api.github.com/users/hadley/orgs',function(){
+		
+		console.log(gcsVue.data.result);
+	});*/
 </script>
 
 </html>
