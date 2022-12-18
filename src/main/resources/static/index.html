@@ -8,6 +8,7 @@
  </head>
 
 <script src="/js/vue.3.2.45.prod.js"></script>
+<script src="https://unpkg.com/axios@1.0.0-alpha.1/dist/axios.min.js"></script>
 <script src="/js/gcsVue.js"></script>
 <!--script src="https://unpkg.com/vue@3"></script --><!-- 최신버전확인 -->
 
@@ -47,22 +48,50 @@
                         name: 'Park',
                         age: 19
                     }
-                ]
+                ],
+                cnt:0,result:{}
+           
             };
     var app = Vue.createApp({
-        data() { return gcsVue.data; },
+        data() { return gcsVue.data;
+           },
 		watch: {
-			result(newResult, oldResult){
-				console.log(newResult);
+			cnt(newResult, oldResult){				
 				console.log(oldResult);
+				console.log(newResult);
 				alert(888);
+			},
+			result(newResult, oldResult){				
+				console.log(oldResult);
+				console.log(newResult);
+				alert(999);
 			}
 		},
         methods: {
 			cSubmit:function(){
+				gcsVue.data.cnt++;
+				//this.cnt++;
+				//console.log(gcsVue.data);
 				alert(1);
-				gcsVue.methods.getDataGET('https://api.github.com/users/hadley/orgs');
-				alert(2);
+				
+				let axPromise0 = $api('https://api.github.com/users/hadley/orgs', 'get', '');
+				axPromise0.then(() => {
+					    console.log('Then!');
+					    
+					    }).catch(() => {
+							    console.log('Error!');
+							    });
+				//console.log(axPromise0);
+				
+				//let axPromise = gcsVue.methods.getDataGET('https://api.github.com/users/hadley/orgs');
+				//let axPromise = getData('https://api.github.com/users/hadley/orgs');
+				/*let axPromise = axiosGet('https://api.github.com/users/hadley/orgs');
+				console.log(axPromise);
+				axPromise.then(response=>response.json())
+				.then(json=>{
+						this.result = json;aletr(2);
+				}).catch(error=>{console.log(error);});*/
+				
 				
 				//console.log(gcsVue.data.result);
 			}
