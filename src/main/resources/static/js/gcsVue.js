@@ -27,6 +27,8 @@ let axFatchData = async function(url, method, data) {
 	  })
 	).data;
 };
+// test : GET/POST https://jsonplaceholder.typicode.com/posts
+// test : GET/PUT/PATCH/DELETE https://jsonplaceholder.typicode.com/posts/1
     
 async function getData(url){
   let response = fetch(url);
