@@ -16,6 +16,20 @@ gcsVue.methods.getDataGET=function(url,callback){
 
 // axios 동기식 호출 함수 post/get 처리가능
 // 사용방법 let response = await axFatchData('https://api.github.com/users/hadley/orgs', 'get');
+async function axiosFatchData(url, method, data) {
+	return (
+	  await axios({
+		method: method,
+		url,
+		data,
+	  }).catch((e) => {
+		console.log(e);
+	  })
+	).data;
+}
+
+// axios 동기식 호출 함수 post/get 처리가능
+// 사용방법 let response = await axFatchData('https://api.github.com/users/hadley/orgs', 'get');
 let axFatchData = async function(url, method, data) {
 	return (
 	  await axios({
@@ -27,6 +41,7 @@ let axFatchData = async function(url, method, data) {
 	  })
 	).data;
 };
+// test : GET https://api.github.com/users/hadley/orgs
 // test : GET/POST https://jsonplaceholder.typicode.com/posts
 // test : GET/PUT/PATCH/DELETE https://jsonplaceholder.typicode.com/posts/1
     
@@ -60,19 +75,7 @@ async function axiosGet(url){
         return axiosData;
       }
 
-// axios 동기식 호출 함수 post/get 처리가능
-// 사용방법 let response = await axFatchData('https://api.github.com/users/hadley/orgs', 'get');
-async function axFatchData(url, method, data) {
-	return (
-	  await axios({
-		method: method,
-		url,
-		data,
-	  }).catch((e) => {
-		console.log(e);
-	  })
-	).data;
-}
+
 
 
 gcsVue.methods.getDataPOST=function(){
