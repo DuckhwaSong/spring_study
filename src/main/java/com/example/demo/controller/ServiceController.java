@@ -28,15 +28,8 @@ public class ServiceController {
 	@Autowired
 	private BoardDao boardDao;
 	
-	@RequestMapping("/serv")
-	@ResponseBody
-	public Map<String, Object> serv(HttpServletRequest request) throws Exception{
-		return this.serv_(request);
-	}
-	
-	@RequestMapping("/serv/*")
-	@ResponseBody
-	public Map<String, Object> serv_(HttpServletRequest request) throws Exception{
+	public Map<String, Object> httpInfo(HttpServletRequest request) throws Exception{
+		// 서블릿 정보 확인 : https://www.devkuma.com/docs/jsp-servlet/httpservletrequest-%EB%A9%94%EC%86%8C%EB%93%9C/
 		
 		Map<String, Object> paramData = new HashMap<>();
 		Map<String, Object> headerData = new HashMap<>();
@@ -44,7 +37,6 @@ public class ServiceController {
 		Map<String, Object> httpData = new HashMap<>();
 		Map<String, Object> returnData = new HashMap<>();
 		
-		// 서블릿 정보 확인 : https://www.devkuma.com/docs/jsp-servlet/httpservletrequest-%EB%A9%94%EC%86%8C%EB%93%9C/
 		
 		// get param 데이터
 		Enumeration params = request.getParameterNames();
@@ -89,10 +81,43 @@ public class ServiceController {
 		
 		// sql직접실행
 		
+		return returnData;
+				
+	}
+	
+	@RequestMapping("/serv")
+	@ResponseBody
+	public Map<String, Object> serv(HttpServletRequest request) throws Exception{
+		return this.serv_(request);
+	}
+	
+	@RequestMapping("/serv/*")
+	@ResponseBody
+	public Map<String, Object> serv_(HttpServletRequest request) throws Exception{
 
+		Map<String, Object> returnData = new HashMap<>();
 
-		
+		switch(request.getRequestURI()) {
+			case "/serv/httpInfo":
+				returnData = this.httpInfo(request);
+				break;
+			case "/serv/testReq":
+				returnData = this.testReq(request);
+				break;
+			default:
+				returnData = this.httpInfo(request);
+				break;
+		}
+		return returnData;
+
+	}
+	
+	public Map<String, Object> testReq(HttpServletRequest request) throws Exception{
+		Map<String, Object> returnData = new HashMap<>();
+
+		returnData.put("httpInfo", "123");
 		return returnData;
 	}
+
 	
 }
