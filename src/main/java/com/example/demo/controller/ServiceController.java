@@ -1,32 +1,45 @@
 package com.example.demo.controller;
 
 import java.util.HashMap;
-import java.util.List;
+//import java.util.List;
 import java.util.Map;
+import java.util.Collections;
 import java.util.Enumeration;
-import java.io.DataInputStream;
+//import java.io.DataInputStream;
 
-import javax.annotation.Resource;
+//import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+//import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.example.demo.model.BoardDao;
-import com.example.demo.vo.BoardVo;
+//import com.example.demo.model.BoardDao;
+import com.example.demo.model.ServDao;
+//import com.example.demo.vo.BoardVo;
 
 @Controller
 public class ServiceController {
 
-	private Logger logger = LoggerFactory.getLogger(ServiceController.class);
+	//private Logger logger = LoggerFactory.getLogger(ServiceController.class);
 	
 	@Autowired
-	private BoardDao boardDao;
+	//private BoardDao boardDao;
+	private ServDao ServDao;
+	
+	@RequestMapping("/Servdb")
+	@ResponseBody
+	public Map<String, Object> Servdb(HttpServletRequest request) throws Exception{
+		Map<String, Object> returnData = new HashMap<>();
+		returnData.put("Servdb-sql", Collections.singletonMap("test", ServDao.servExec()));
+		
+		return returnData;
+		//return Collections.singletonMap("test", ServDao.servExec());
+	}
 	
 	public Map<String, Object> httpInfo(HttpServletRequest request) throws Exception{
 		// 서블릿 정보 확인 : https://www.devkuma.com/docs/jsp-servlet/httpservletrequest-%EB%A9%94%EC%86%8C%EB%93%9C/
@@ -39,7 +52,7 @@ public class ServiceController {
 		
 		
 		// get param 데이터
-		Enumeration params = request.getParameterNames();
+		Enumeration<String> params = request.getParameterNames();
 		while (params.hasMoreElements()) {
 		    String name = (String) params.nextElement();
 		    String value = request.getParameter(name);
