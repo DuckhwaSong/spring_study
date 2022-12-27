@@ -92,6 +92,10 @@ public class ServiceController {
 		returnData.put("params", paramData);
 		returnData.put("headerData", headerData);
 		
+		
+		// 디버깅
+		System.out.println(returnData);
+		
 		// sql직접실행
 		
 		return returnData;
